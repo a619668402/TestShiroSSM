@@ -16,7 +16,7 @@
 <div class="workingroom">
 
     <div class="errorInfo">${error}</div>
-    <form action="login" method="post">
+    <form action="${pageContext.request.contextPath}/login.do" method="post">
         账号： <input type="text" name="name"> <br>
         密码： <input type="password" name="password"> <br>
         <br>
