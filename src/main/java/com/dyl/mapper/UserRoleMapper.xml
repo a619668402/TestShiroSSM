@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dyl.mapper.RoleMapper">
-  <resultMap id="BaseResultMap" type="role">
+<mapper namespace="com.dyl.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="userRole">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="desc_" jdbcType="VARCHAR" property="desc_" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="rid" jdbcType="BIGINT" property="rid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -36,16 +36,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, desc_
+    id, uid, rid
   </sql>
-  <select id="selectByExample" parameterType="roleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="userRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from role
+    from user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -56,60 +56,52 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from role
+    from user_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from role
+    delete from user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="role" useGeneratedKeys="true">
-    insert into role (name, desc_)
-    values (#{name,jdbcType=VARCHAR}, #{desc_,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="userRole" useGeneratedKeys="true">
+    insert into user_role (uid, rid)
+    values (#{uid,jdbcType=BIGINT}, #{rid,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="role" useGeneratedKeys="true">
-    insert into role
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="userRole" useGeneratedKeys="true">
+    insert into user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="uid != null">
+        uid,
       </if>
-      <if test="desc_ != null">
-        desc_,
+      <if test="rid != null">
+        rid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
       </if>
-      <if test="desc_ != null">
-        #{desc_,jdbcType=VARCHAR},
+      <if test="rid != null">
+        #{rid,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="role">
-    update role
+  <update id="updateByPrimaryKeySelective" parameterType="userRole">
+    update user_role
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="uid != null">
+        uid = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="desc_ != null">
-        desc_ = #{desc_,jdbcType=VARCHAR},
+      <if test="rid != null">
+        rid = #{rid,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="role">
-    update role
-    set name = #{name,jdbcType=VARCHAR},
-      desc_ = #{desc_,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="userRole">
+    update user_role
+    set uid = #{uid,jdbcType=BIGINT},
+      rid = #{rid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
-  <select id="listRolesByUserName" parameterType="java.lang.String" resultType="role">
-    SELECT r.id,r.name, r.desc_
-    FROM role r
-    LEFT JOIN user_role ur on r.id = ur.rid
-    LEFT JOIN user u on u.id = ur.uid
-    where u.name = #{userName}
-  </select>
 </mapper>

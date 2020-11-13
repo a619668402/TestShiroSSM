@@ -1,16 +1,19 @@
 package com.dyl.model;
 
 public class Permission {
-
-    private Integer id;
+    private Long id;
 
     private String name;
 
-    public Integer getId() {
+    private String desc_;
+
+    private String url;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -19,14 +22,22 @@ public class Permission {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
-    @Override
-    public String toString() {
-        return "Permission{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public String getDesc_() {
+        return desc_;
+    }
+
+    public void setDesc_(String desc_) {
+        this.desc_ = desc_ == null ? null : desc_.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 }

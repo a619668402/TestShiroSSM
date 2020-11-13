@@ -46,16 +46,16 @@ public class PageController {
     public String logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "redirect:index.do";
+        return "redirect:/index.do";
     }
 
-    @RequiresPermissions("deleteOrder")
+//    @RequiresPermissions("deleteOrder")
     @RequestMapping("deleteOrder")
     public String deleteOrder() {
         return "deleteOrder";
     }
 
-    @RequiresRoles("admin")
+//    @RequiresRoles("admin")
     @RequestMapping("deleteProduct")
     public String deleteProduct() {
         return "deleteProduct";
@@ -71,6 +71,10 @@ public class PageController {
         return "unauthorized";
     }
 
+    @RequestMapping("menu")
+    public String menu() {
+        return "menu";
+    }
 
     @Autowired
     private UserService userService;

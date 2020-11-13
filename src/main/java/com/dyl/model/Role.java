@@ -1,18 +1,17 @@
 package com.dyl.model;
 
-import java.io.Serializable;
-
-public class Role implements Serializable {
-
-    private Integer id;
+public class Role {
+    private Long id;
 
     private String name;
 
-    public Integer getId() {
+    private String desc_;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -21,14 +20,14 @@ public class Role implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public String getDesc_() {
+        return desc_;
+    }
+
+    public void setDesc_(String desc_) {
+        this.desc_ = desc_ == null ? null : desc_.trim();
     }
 }
